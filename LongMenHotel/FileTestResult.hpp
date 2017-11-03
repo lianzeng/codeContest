@@ -20,7 +20,7 @@ public:
 			i++;
 		}
 
-		ofs.flush();
+		ofs.flush(); 
 		ofs.close();
 	}
 

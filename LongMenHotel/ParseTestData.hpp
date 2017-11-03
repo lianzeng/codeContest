@@ -21,7 +21,7 @@ public:
 
 		storeTestCase(numOfTestCases, inputFile);
 
-		inputFile.close();
+		inputFile.close(); 
 
 		//showTestCases();
 	}

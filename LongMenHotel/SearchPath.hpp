@@ -25,7 +25,7 @@ enum EDirection
 
 class Solution
 {
-public:
+public: 
 
 
 	Solution(const GraphMatrix& imatrix, const Paramerters& iParas) :

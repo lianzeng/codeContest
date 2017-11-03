@@ -25,7 +25,7 @@ public:
 		mPath(),  mStart(InvalidPoint), mEnd(InvalidPoint), minDistance(INFINITE), mMatrix(imatrix), requiredDays(iParas.maxDays)
 	{
 		auto vertexSet = buildVertexSet(mMatrix);
-		minDistance = calculateShortestPath(vertexSet, mEnd);
+		minDistance = calculateShortestPath(vertexSet, mEnd); 
 	}
 
 	bool canReachWithRequiredDays()

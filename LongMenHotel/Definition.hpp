@@ -23,7 +23,7 @@ using GraphMatrix = std::vector<std::vector<char>>;
 
 using CaseInfo = std::pair<Paramerters, GraphMatrix>;
 
-using CaseList = std::vector< CaseInfo >;
+using CaseList = std::vector< CaseInfo >; 
 
 using std::ifstream;
 

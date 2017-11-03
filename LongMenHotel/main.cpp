@@ -24,7 +24,7 @@ int main()
 			result.push_back("YES");
 		else
 			result.push_back("NO");
-		//so.printPath();	
+		//so.printPath();	   
 	}
 
 	FileTestResult saveResultToFile(result, "output1.txt");

@@ -27,7 +27,7 @@ bool Solution::getPath(Point curr)
 
 	mPath.pop_back();//revert
 
-	failRecords.insert(curr);
+	failRecords.insert(curr); 
 
 	return false;
 }
