@@ -24,7 +24,7 @@ int main()
 			result.push_back("YES");
 		else
 			result.push_back("NO");
-		//so.printPath();	   
+		so.printPath();	   
 	}
 
 	FileTestResult saveResultToFile(result, "output1.txt");
@@ -41,7 +41,10 @@ int main()
 	{
 		Dijkstra dijkstra(oneCase.second, oneCase.first);
 		if (dijkstra.canReachWithRequiredDays())
+		{
 			result.push_back("YES");
+			dijkstra.printPath();
+		}
 		else
 			result.push_back("NO");
 		

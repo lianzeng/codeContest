@@ -8,6 +8,7 @@
 #include "Definition.hpp"
 #include <cassert>
 #include <climits>
+#include <unordered_map>
 
 using Point = std::pair<int, int>; //{row, col}
 using PVector = std::vector<Point>;
@@ -16,25 +17,36 @@ using Distance = int;
 using WeightVetex = std::pair<Point,Distance>;//Distance = currentVetex to startPoint.
 using VetexSet = std::vector<WeightVetex>;
 
-//Thinking: Dijkstra is a greedy algorithm, Is it valid in disconnected graph ??
+//Thinking: Dijkstra is a greedy algorithm,  it is also valid in disconnected graph.
+
+#define HASH_MAP_BUCKET_SIZE 200
 
 class Dijkstra 
 {
 public:
 	Dijkstra(const GraphMatrix& imatrix, const Paramerters& iParas):
-		mPath(),  mStart(InvalidPoint), mEnd(InvalidPoint), minDistance(INFINITE), mMatrix(imatrix), requiredDays(iParas.maxDays)
+		preMap(HASH_MAP_BUCKET_SIZE,hash),mPath(), mSvetex(),  
+		mStart(InvalidPoint), mEnd(InvalidPoint), minDistance(INFINITE), 
+		mMatrix(imatrix), requiredDays(iParas.maxDays)
 	{
 		auto vertexSet = buildVertexSet(mMatrix);
 		minDistance = calculateShortestPath(vertexSet, mEnd); 
 	}
 
-	bool canReachWithRequiredDays()
+	bool canReachWithRequiredDays() const
 	{
-		std::cout << "\n minDistance is " << minDistance <<" ,requiredDays is " <<requiredDays << "  \n";
+		if (minDistance == INFINITE) std::cout << "\n start can't reach End , they are disconnected. \n";
+		else std::cout << "\n minDistance is " << minDistance <<" ,requiredDays is " <<requiredDays << "  \n";
 		return minDistance <= requiredDays;
 	}
 
+	bool printPath();
+
+	
+	
 private:
+	PVector getPath();
+
 	VetexSet buildVertexSet(const GraphMatrix& matrix)
 	{
 		VetexSet vset;
@@ -45,7 +57,7 @@ private:
 				if (matrix[r][c] != OBSTACLE)
 				{
 					Point p = { r, c };
-					Distance d = INFINITE;
+					Distance d = INFINITE; //initial all the distance to Infinite except the start point.
 					if (matrix[r][c] == START)    { setStartPoint(p); d = 0; }
 					else if (matrix[r][c] == END) { setEndPoint(p); }
 					
@@ -69,7 +81,7 @@ private:
 
 	int calculateShortestPath(const VetexSet& Vset, const Point target) //refer to <Introduction To Algorithm>
 	{
-		VetexSet Svetex = { };
+		mSvetex = { };
 		VetexSet Qset = Vset;
 		bool connectOver = false;
 
@@ -79,7 +91,7 @@ private:
 
 			if (u.first == target || u.first == InvalidPoint) return u.second;
 
-			joinToS(u, Svetex); //S = S U {u}
+			joinToS(u, mSvetex); //S = S U {u}
 
 		    relaxNeighborVetexDistance(u, Qset); 
 		}
@@ -118,37 +130,44 @@ private:
 		s.push_back(u);
 	}
 
-	void relaxNeighborVetexDistance(const WeightVetex u, VetexSet&  Qset)//Note: the start may not reach to end if they are in two disconneted area.
+	void relaxNeighborVetexDistance(const WeightVetex u, VetexSet&  Qset)
 	{
 		
 		auto adjacents = getNeighborVetex(u.first);		
 
 		for (auto& p : adjacents)
 		{
-			updateShortestDistInQset(u, p, Qset);
+			updateDistance(u, p, Qset);
 		}
 
 		
 	}
 
-	void updateShortestDistInQset(const WeightVetex u, const Point adjacent, VetexSet&  Qset)
+	void updateDistance(const WeightVetex u, const Point toUpdate, VetexSet&  Qset)
 	{
 		
 		for (auto& v : Qset)
 		{
-			if (v.first == adjacent)
+			if (v.first == toUpdate)
 			{
 				auto newD = distance(v.first, u.first) + u.second;
 
-				if (v.second > newD) 
-				  v.second = newD;
+				if (v.second > newD)
+				{
+					v.second = newD;//TODO: set newD as the pre-vetex, will be used to form path.
+					recordPreShip(v.first, u.first);
+				}
 
-				return ; //found Adacent In Qset.
+				return ;
 			}
 		}
+				
+	}
 
-		
-		//for disconnected graph, may reach here.
+	void recordPreShip(const Point curr, const Point pre)
+	{
+		assert(preMap.find(curr) == preMap.end());
+		preMap[curr] = pre;
 	}
 
 	int distance(Point p1, Point p2) 
@@ -174,7 +193,7 @@ private:
 
 	bool isValid(Point p) const
 	{
-		return inRange(p) && !isObstacle(p); //TODO check: p must in Qset ?
+		return inRange(p) && !isObstacle(p) && !joined(p); 
 	}
 
 	bool inRange(Point p) const
@@ -189,9 +208,28 @@ private:
 		return (mMatrix[p.first][p.second] == OBSTACLE);
 
 	}
+	bool joined(Point p) const
+	{
+		for (auto& s: mSvetex)
+		{
+			if (s.first == p) return true;
+		}
+		return false;
+	}
 
+	static size_t hash(Point p)
+	{
+		return p.first*p.second;
+	}
+
+	
+	void maskPosition(PVector path, std::vector<std::vector<char> >& matrix, char c);//debug method
 private:
+	using HashMap = std::unordered_map<Point,Point,decltype(hash)*>;
+	HashMap preMap;//[key,value] --- [currVetex, preVetex]
 	PVector mPath;
+
+	VetexSet mSvetex;//temp.
 		
 	Point mStart;
 	Point mEnd;
