@@ -1,37 +1,32 @@
-========================================================================
-    CONSOLE APPLICATION : [!output PROJECT_NAME] Project Overview
-========================================================================
+幼儿园分糖果:
 
-AppWizard has created this [!output PROJECT_NAME] application for you.
+你是一位聪明的幼儿园老师，今天是幼儿园开放日。大批家长，记者们凭借收到的邀请会准备一组接一组前来参观幼儿园。幼儿园为来参观的每个人都准备了可口的糖果，一人一颗。 糖果是盒装的，每盒的颗数P都相同。环保又小气的园长告诉你尽量不要浪费这些糖果，在分完一盒糖果之前绝对不要拆开新的一盒！但是作为家长或者记者，分到一颗从别的小组分剩下的糖果是一件不怎么高兴的事情。比如一盒糖果是3颗，第一组参观的人数是5人，那就会拆出两盒糖果，在一人分到一颗之后剩下了一颗。这样第二组参观的某人就分到了那颗剩下的，心想你们怎么这么抠门。作为组织老师的你两头受气，既不能违反园长的嘱咐又希望能改善这次参观体验。于是你从园长那里得到了准备参观幼儿园的人员分组情况。你不能改变每组的人数，你也不能拒绝某一组的参观，你还要保证每个人都分到一颗糖，你能做的就是合理安排各组参观幼儿园的顺序来让尽可能多的小组里的所有人都分到新拆开的糖果。
 
-This file contains a summary of what you will find in each of the files that
-make up your [!output PROJECT_NAME] application.
+举个完整的例子
+假如有4组人员准备前来参观，分别是5人，6人，4人，4人。糖果一盒是3颗。如果你按照5，6，4，4的顺序安排他们参观，那第一组的所有人都很开心的分到了新开的糖果，第二组某人分到了第一组剩下的一颗而不太开心，第三组又有某人分到了第二组剩下的一颗也不怎么高兴。第四组的所有人又都分到了新开的糖果觉得不错。4组参观下来有2组非常满意而另外两组颇有微词。如果你灵机一动，把他们的参观顺序改成4，5，6，4，这样我们会发现除了第二组，其他三组都会分到全新拆开的糖果而感到非常满意。这也是能取得的最好结果了。
+输入（Input）
+文件的第一行是测试用例的个数T。接下来会有T个case。每个case有2行，第一行有两个数字，第一个是参观的小组个数N，第二个数是每盒糖果的颗数P。第二行会有N个数字，G1, G2, ..., GN分别表示每个参观小组的人数。
+输出（Output）
+对于每个测试用例，在输出文件中输出一行包含 Case #x: y的样式。其中x是测试用例的编号（从1开始），y是这个测试用例中最大有可能达到的让所有人分到新拆开糖果而感到满意的小组个数。
+限制（Limits）
+1 ≤ T ≤ 100.
+1 ≤ N ≤ 100.
+1 ≤ Gi ≤ 100, for all i.
+Small dataset
+2 ≤ P ≤ 3.
+Large dataset
+2 ≤ P ≤ 4.
 
-
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
-
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
-    This is the main application source file.
-
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named [!output PROJECT_NAME].pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+例子
+Input
+3
+4 3
+4 5 6 4
+4 2
+4 5 6 4
+3 3
+1 1 1
+Output 
+Case #1: 3
+Case #2: 4
+Case #3: 1
