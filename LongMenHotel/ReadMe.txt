@@ -1,7 +1,7 @@
 I have implement 3 ways for this problem, all output path:
-1.back-trace,  End to Start, recursive.
-2.Dijkstra to caculate shortest distance.
-3.greedy BFS.
+1.back-trace, DFS.                           refer to: SearchPath.cpp/hpp;
+2.Dijkstra to caculate shortest distance.    refer to: Dijkstra.cpp/hpp;
+3.greedy BFS to caculate shortest distance.  refer to: GreedyBFS.cpp/hpp;
 
 
 龙门客栈
