@@ -3,9 +3,9 @@
 #include "SearchPath.hpp"
 #include <iostream>
 
-const Point Solution::InvalidPoint = {-1,-1};
+const Point DFSearch::InvalidPoint = {-1,-1};
 
-bool Solution::getPath(Point curr)
+bool DFSearch::getPath(Point curr)
 {
 	if (exceedTime() || alreadyFailed(curr))
 	{
@@ -32,7 +32,7 @@ bool Solution::getPath(Point curr)
 	return false;
 }
 
-bool Solution::printPath()
+bool DFSearch::printPath()
 {
 	if (0 == mPath.size())
 	{
@@ -66,7 +66,7 @@ bool Solution::printPath()
 	return true;
 }
 
-void Solution::maskPosition(std::vector<Point> path,  GraphMatrix& matrix, char c)
+void DFSearch::maskPosition(std::vector<Point> path,  GraphMatrix& matrix, char c)
 {
 	for (auto& p : path)
 		matrix[p.first][p.second] = c;

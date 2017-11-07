@@ -23,12 +23,12 @@ enum EDirection
 	EDirection_RIGHT
 };
 
-class Solution
+class DFSearch
 {
 public: 
 
 
-	Solution(const GraphMatrix& imatrix, const Paramerters& iParas) :
+	DFSearch(const GraphMatrix& imatrix, const Paramerters& iParas) :
 		mPath(),failRecords(HASH_BUCKET_SIZE, hash), mStart(InvalidPoint),mEnd(InvalidPoint), mMatrix(imatrix), mParas(iParas)
 	{
 

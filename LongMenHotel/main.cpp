@@ -10,7 +10,7 @@
 #include "Dijkstra.hpp"
 #include "GreedyBFS.hpp"
 
-
+#define DIJKSTRA
 
 int main()
 {		
@@ -24,10 +24,12 @@ int main()
 
 	for (auto& oneCase : testCases)
 	{
-		Solution so(oneCase.second, oneCase.first);
-		if (so.searchPath())
+		DFSearch dfs(oneCase.second, oneCase.first);
+		if (dfs.searchPath())
+		{
 			result.push_back("YES");
-		    so.printPath();
+			dfs.printPath();
+		}
 		else
 			result.push_back("NO");
 		 
@@ -50,7 +52,7 @@ int main()
 		if (dijkstra.canReachWithRequiredDays())
 		{
 			result.push_back("YES");
-			//dijkstra.printPath();
+			dijkstra.printPath();
 		}
 		else
 			result.push_back("NO");
@@ -72,7 +74,7 @@ int main()
 		if (bfs.canReachWithRequiredDays())
 		{
 			result.push_back("YES");
-			//bfs.printPath();
+			bfs.printPath();
 		}
 		else
 			result.push_back("NO");

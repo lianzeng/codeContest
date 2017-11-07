@@ -27,22 +27,23 @@ class PriorityQueue //here can't use STL::Priority_queue, as here need uniquepus
 public:
 	PriorityQueue(FatherMap& imap):fatherMap(imap){}
 
-	void push(const ElementType& element)//update to the shortest distance if already exist in queue.
+	void push(const ElementType& element, Point father)
 	{
 		for (size_t i = 0; i < queue.size(); i++)
 		{
-			if (queue[i].first == element.first)
+			if (queue[i].first == element.first)//update to the shortest distance if already exist in queue.
 			{
 				if (queue[i].second > element.second)
 				{
 					queue[i].second = element.second;
-					//updateFatherMap(element.first, father);
+					updateFatherMap(element.first, father);
 				}
 				return;
 			}
 		}
 
-		queue.push_back(element);//not exsit in queue.
+		queue.push_back(element);//it's a new element.
+		updateFatherMap(element.first, father);
 	}
 
 	ElementType pop()//pop the shortest candidate from queue.
@@ -96,12 +97,14 @@ public:
 		return minDistance <= requiredDays;
 	}
 
+	bool printPath();
+
 private:
 	int calculateShortestPath(const Point from, const Point target)//BFS classical.
 	{
 		PVector visited;
 		PriorityQueue queue(fatherMap); //use priority_queue instead of FIFO_queue.
-		queue.push({ from , 0});
+		queue.push({ from , 0}, InvalidPoint);
 
 		while (!queue.empty())
 		{
@@ -117,7 +120,7 @@ private:
 				if (!inSet(visited, vetex))
 				{
 					auto dist = ele.second + distance(ele.first, vetex);
-					queue.push({vetex, dist});
+					queue.push({vetex, dist}, ele.first);
 				}
 			}
 		}
@@ -194,6 +197,8 @@ private:
 		return 1;  //as the p1,p2 is adjacent in current case. Extend: the distance not 1.
 	}
 
+	void maskPosition(PVector path, std::vector<std::vector<char> >& matrix, char c);//debug method
+	PVector getPath();
 private:
 	const GraphMatrix mMatrix;
 	const int requiredDays;
