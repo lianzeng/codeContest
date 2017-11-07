@@ -1,37 +1,43 @@
-========================================================================
-    CONSOLE APPLICATION : [!output PROJECT_NAME] Project Overview
-========================================================================
+写一个程序来打保龄球。 输入:字符串(如下所述)表示保龄球游戏 输出:整数的分数
 
-AppWizard has created this [!output PROJECT_NAME] application for you.
+评分规则: 每局游戏，包括十个回合， 在每一个回合中，参与者都有两次机会把十个球瓶都打掉。
 
-This file contains a summary of what you will find in each of the files that
-make up your [!output PROJECT_NAME] application.
+如果一个回合中，第一个球把10个球瓶都敲掉了， 这被称为“全中”。回合结束。本回合分数为10 + 接下来两球打掉的球瓶数。
 
+如果一个回合里的第二个球把10个球瓶都打掉了， 这被称为“补全”。回合结束了。分数为框架是10 + 接下来一个球打掉的球瓶数。
 
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+如果，在两个球之后，仍然至少有一个球瓶站立， 本回合分数为两个球打掉的球瓶总数。
 
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+如果你在第10个回合打出“全中”，你就会得到2个奖励球 如果你在第10个回合打出“补全”，你就会得到1个奖励球
 
-    This is the main application source file.
+这些额外的奖励球被作为同一回合的一部分。 如果一个额外的球打倒了所有的球瓶，这个过程 不重复。奖励球只用于计算最后一个回合的分数。
 
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
+游戏分数是所有回合分数的总和。
 
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named [!output PROJECT_NAME].pch and a precompiled types file named StdAfx.obj.
+例子: X表示“全中” /表示“补全” -表示错过 |表示回合边界 ||后面的字符表示额外的奖励球
 
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
+X|X|X|X|X|X|X|X|X|X||XX 十次“全中”在十个回合的第一个球上。 两个额外的球，都“全中”。 每一个回合的得分= = 10 + 分数球= = 10 + 10 + 10 = = 30 总得分= = 10回合 x 30 = = 300
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+9-|9-|9-|9-|9-|9-|9-|9-|9-|9-|| 九个球瓶在十个回合的第一个球被击中。 每一回合的第二球错过最后的球瓶。 没有额外的球。 每一回合的得分 = = 9 总分= = 10回合 x 9 = = 90
 
-/////////////////////////////////////////////////////////////////////////////
+5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5 在十回合的第一个球上有五个球瓶。 每一回合的第二颗球击中剩下的5个球瓶。 一个额外的球，击中5个球瓶。 每回合的得分 = = 10 + 下一个球的分数 = = 10 + 5 = = 15 总分= = 10回合x 15 = = 150
+
+X|7/|9-|X|-8|8/|-6|X|X|X||81 总分= = 167
+
+输入输出文件格式：输入文件的第一行为测试数据的个数，后面每一行为一个测试数据；输出文件每一行对映一个测试数据的分数结果。
+
+例子:
+
+Input:
+
+2
+
+X|X|X|X|X|X|X|X|X|X||XX
+
+X|7/|9-|X|-8|8/|-6|X|X|X||81
+
+Output:
+
+300
+
+167
