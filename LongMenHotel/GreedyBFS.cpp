@@ -45,8 +45,7 @@ PVector GreedyBFS::getPath()
 {
 	PVector path;
 	if (canReachWithRequiredDays())
-	{
-		//path.push_back(mEnd);
+	{		
 		auto v = mEnd;
 		for (; fatherMap.find(v) != fatherMap.end() && v != mStart; v = fatherMap[v])
 		{

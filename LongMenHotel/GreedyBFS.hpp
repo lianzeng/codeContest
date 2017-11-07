@@ -104,7 +104,7 @@ private:
 	{
 		PVector visited;
 		PriorityQueue queue(fatherMap); //use priority_queue instead of FIFO_queue.
-		queue.push({ from , 0}, InvalidPoint);
+		queue.push({ from , 0}, InvalidPoint);//from has no father, so set it's father as InvalidPoint.
 
 		while (!queue.empty())
 		{
