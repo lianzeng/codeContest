@@ -1,37 +1,27 @@
-========================================================================
-    CONSOLE APPLICATION : [!output PROJECT_NAME] Project Overview
-========================================================================
+大数加法
+在计算机中，由于处理器位宽限制，只能处理有限精度的十进制整数加减法，比如在32位宽处理器计算机中，参与运算的操作数和结果必须在-2^31~2^31-1之间。如果需要进行更大范围的十进制整数加法，需要使用特殊的方式实现，比如使用字符串保存操作数和结果，采取逐位运算的方式。如下：
+9876543210 + 1234567890 = ?
+让字符串 num1 = "9876543210"，字符串 num2 = "1234567890"，结果保存在字符串 result = "11111111100"。
+-9876543210 + (-1234567890) = ?
+让字符串 num1 = "-9876543210"，字符串 num2 = "-1234567890"，结果保存在字符串 result = "-11111111100"。
+要求编程实现上述高精度的十进制加法。
+Input
+num1, num2
+num3, num4 
 
-AppWizard has created this [!output PROJECT_NAME] application for you.
+num1,num2,num3,num4: 字符串形式操作数，如果操作数为负，则num1的前缀为符号位'-'
 
-This file contains a summary of what you will find in each of the files that
-make up your [!output PROJECT_NAME] application.
+Output
+保存加法计算结果字符串，如果结果为负，则字符串的前缀为'-' result Of Num1 Add Num2
+result Of Num3 Add Num4
 
+注：
+(1)当输入为正数时，'+'不会出现在输入字符串中；当输入为负数时，'-'会出现在输入字符串中，且一定在输入字符串最左边位置；
+(2)输入字符串所有位均代表有效数字，即不存在由'0'开始的输入字符串，比如"0012", "-0012"不会出现；
+(3)要求输出字符串所有位均为有效数字，结果为正或0时'+'不出现在输出字符串，结果为负时输出字符串最左边位置为'-'。 
 
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+输入例子
+9876543210,1234567890
 
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
-    This is the main application source file.
-
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named [!output PROJECT_NAME].pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+输出例子
+11111111100
