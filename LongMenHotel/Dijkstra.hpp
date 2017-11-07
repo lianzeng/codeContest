@@ -79,7 +79,7 @@ private:
 		mEnd = p;
 	}
 
-	int calculateShortestPath(const VetexSet& Vset, const Point target) //refer to <Introduction To Algorithm>
+	int calculateShortestPath(const VetexSet& Vset, const Point target) //Dijkstra refer to <Introduction To Algorithm>
 	{
 		mSvetex = { };
 		VetexSet Qset = Vset;
@@ -155,7 +155,7 @@ private:
 				if (v.second > newD)
 				{
 					v.second = newD;//TODO: set newD as the pre-vetex, will be used to form path.
-					recordPreShip(v.first, u.first);
+					recordPreShip(toUpdate, u.first);
 				}
 
 				return ;
@@ -165,8 +165,7 @@ private:
 	}
 
 	void recordPreShip(const Point curr, const Point pre)
-	{
-		assert(preMap.find(curr) == preMap.end());
+	{		
 		preMap[curr] = pre;
 	}
 

@@ -8,10 +8,13 @@
 #include "ParseTestData.hpp"
 #include "FileTestResult.hpp"
 #include "Dijkstra.hpp"
+#include "GreedyBFS.hpp"
+
+//#define DFS
 
 int main()
 {		
-#if 1
+#ifdef DFS
 	ParseTestData input("input.txt");
 	auto testCases = input.getTestCases();
 
@@ -22,15 +25,16 @@ int main()
 		Solution so(oneCase.second, oneCase.first);
 		if (so.searchPath())
 			result.push_back("YES");
+		    so.printPath();
 		else
 			result.push_back("NO");
-		so.printPath();	   
+		 
 	}
 
 	FileTestResult saveResultToFile(result, "output1.txt");
 
 	
-#else
+#elif defined(DIJKSTRA)
 
 	ParseTestData input("input.txt");
 	auto testCases = input.getTestCases();
@@ -43,7 +47,7 @@ int main()
 		if (dijkstra.canReachWithRequiredDays())
 		{
 			result.push_back("YES");
-			dijkstra.printPath();
+			//dijkstra.printPath();
 		}
 		else
 			result.push_back("NO");
@@ -51,6 +55,27 @@ int main()
 	}
 
 	FileTestResult saveResultToFile(result, "output2.txt");
+
+#else
+
+	ParseTestData input("input.txt");
+	auto testCases = input.getTestCases();
+
+	std::vector<string> result;
+
+	for (auto& oneCase : testCases)
+	{
+		GreedyBFS bfs(oneCase.second, oneCase.first);
+		if (bfs.canReachWithRequiredDays())
+		{
+			result.push_back("YES");
+			//bfs.printPath();
+		}
+		else
+			result.push_back("NO");
+
+	}
+
 #endif
 
     return 0;
