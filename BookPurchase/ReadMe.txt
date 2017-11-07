@@ -1,37 +1,58 @@
-========================================================================
-    CONSOLE APPLICATION : [!output PROJECT_NAME] Project Overview
-========================================================================
 
-AppWizard has created this [!output PROJECT_NAME] application for you.
-
-This file contains a summary of what you will find in each of the files that
-make up your [!output PROJECT_NAME] application.
+I have implement this algorithm using two ways:
+1. use cache to improve performance;
+2. use cache + cut to improve performance.
 
 
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
 
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+盗墓笔记系列图书进入了英国市场, 为了刺激5本不同的盗墓笔记图书的销量，某人气书店决定在店庆活动中为盗墓笔记系列图书提供各种购买的折扣。
+5本书的零售价均为8欧元，但是，
+如果你购买2种不同的书，你会得到一个5%折扣；
+如果你购买3种不同的书，你会得到10%的折扣；
+如果你购买4种不同的书，你会得到20%的折扣；
+如果你购买5种不同的书，得到一个巨大的25%折扣。
+请注意，如果你买四本书，其中3本不同的标题， 对于这3本书，你会得到10%的折扣，但对于第4本书，你仍然要付8欧元。
+你的任务是编写一段代码来计算的任何可能的购物篮(只包含盗墓笔记丛书)，提供尽可能大的折扣。
 
-    This is the main application source file.
+例如，这个篮子的书需要多少钱?
+2本第一本书
+2本第二本书
+2本第三本书
+1本第四本书
+1本第五本书
 
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
+组合这8本书的方法一:
+1组5 本—>25%的折扣(1，2，3，4，5)+ 1组3本—>10%的折扣(1，2，3)
+即：
+5本书25%的折扣+ 3本书10%的折扣
+即：
+5 x(8 - 2.00) == 5 x 6.00 == 30.00
++ 3 x(8 - 0.80) == 3 x 7.20 == 21.60
+总共51.60
 
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named [!output PROJECT_NAME].pch and a precompiled types file named StdAfx.obj.
+然而，组合这8本书的方法二:
+1组4本—> 20%的折扣(1，2，3，4)
+1组4本—> 20%的折扣(1，2，3，5)
+即：
+4本书20%的折扣+ 4本书20%的折扣
+即：
+4 x(8 - 1.60) == 4 x 6.40 == 25.60
++ 4 x(8 - 1.60) == 4 x 6.40 == 25.60
+总共51.20
 
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
+最终，51.20的价格是最大的折扣。
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+程序的输入文件的第一行是一个整数代表用例数量, 以后各行各为一个用例. 每个用例均为一行数字, 每位代表购物篮里的一本书, 该位数字即是这本书的集号。
+要求输出文件的第一行是一个整数代表用例数量, 以后各行各为一个用例的最优价格。
+测试用例数量<=1000, 每个测试用例中书的本数<=1000。
 
-/////////////////////////////////////////////////////////////////////////////
+例如, 输入文件:
+1
+1233 
+
+相应的输出文件:
+1
+29.6 
+
+提示：这道题的思路是把输入转换为“等价表示”，对输入降序排列。
+

@@ -225,7 +225,7 @@ private:
 	void maskPosition(PVector path, std::vector<std::vector<char> >& matrix, char c);//debug method
 private:
 	using HashMap = std::unordered_map<Point,Point,decltype(hash)*>;
-	HashMap preMap;//[key,value] --- [currVetex, preVetex]
+	HashMap preMap;//[key,value] --- [currVetex, fatherVetex]
 	PVector mPath;
 
 	VetexSet mSvetex;//temp.

@@ -10,11 +10,13 @@
 #include "Dijkstra.hpp"
 #include "GreedyBFS.hpp"
 
-//#define DFS
+
 
 int main()
 {		
+
 #ifdef DFS
+
 	ParseTestData input("input.txt");
 	auto testCases = input.getTestCases();
 
@@ -34,6 +36,7 @@ int main()
 	FileTestResult saveResultToFile(result, "output1.txt");
 
 	
+
 #elif defined(DIJKSTRA)
 
 	ParseTestData input("input.txt");
@@ -76,6 +79,7 @@ int main()
 
 	}
 
+	FileTestResult saveResultToFile(result, "output2.txt");
 #endif
 
     return 0;
