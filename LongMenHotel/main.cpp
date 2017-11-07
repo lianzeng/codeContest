@@ -11,7 +11,7 @@
 
 int main()
 {		
-#if 1
+#if 1//DFS
 	ParseTestData input("input.txt");
 	auto testCases = input.getTestCases();
 
@@ -30,7 +30,7 @@ int main()
 	FileTestResult saveResultToFile(result, "output1.txt");
 
 	
-#else
+#else//Dijkstra
 
 	ParseTestData input("input.txt");
 	auto testCases = input.getTestCases();
