@@ -1,7 +1,7 @@
 
 I have implement this algorithm using two ways:
-1. use cache to improve performance;
-2. use cache + cut to improve performance.
+1. use cache to improve performance, refer to "BookPurchaseSlow.hpp"
+2. use cache + cut to improve performance. refer to "BookPurchase.hpp"
 
 
 
