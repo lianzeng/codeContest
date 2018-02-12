@@ -48,7 +48,7 @@ private:
 	{		
 		auto params = parseParams(ifs);
 		
-	    string str;
+	        string str;
 		std::getline(ifs, str);
 		auto headCountList = parseOneRow(str, params.groupNum);
 
@@ -75,7 +75,7 @@ private:
 		string str;
 		std::getline(ifs, str);
 		std::stringstream strstream(str);
-		strstream >> ret.groupNum >> ret.candyNumPerBox;
+		strstream >> ret.groupNum >> ret.candyNumPerBox;//split with space
 		assert(1 <= ret.groupNum && ret.groupNum <= 100);
 		assert(2 <= ret.candyNumPerBox && ret.candyNumPerBox <= 4);
 		return ret;
