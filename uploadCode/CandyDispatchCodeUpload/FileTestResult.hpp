@@ -21,7 +21,7 @@ public:
 		}
 
 		ofs.flush();
-		ofs.close();
+		ofs.close();//close() will be automatically called when destructor ofs
 	}
 
 
