@@ -16,7 +16,7 @@ public:
 		int caseIndex = 1;
 		for (auto& i : result)
 		{			
-			ofs <<"Case #" <<std::to_string(caseIndex) <<": "<< i << "\n";
+			ofs <<"Case #" <<std::to_string(caseIndex) <<": "<< std::to_string(i) << "\n";
 			caseIndex++;
 		}
 
